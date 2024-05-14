@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://pranav073:Lvt87UBGQaKvuwFg@cluster0.ry6yrgj.mongodb.net/paytm-clone');
+mongoose.connect(process.env.MONGO_URI);
 
 const userSchema = new mongoose.Schema({
     username:{
