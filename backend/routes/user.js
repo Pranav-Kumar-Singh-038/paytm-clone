@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../db/index');
+const { User, Account } = require('../db/index');
 const { zodUser, zodUserin } = require('../types');
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = process.env;
@@ -26,12 +26,20 @@ router.post('/signup', async function (req, res) {
     })
     const userId = user._id;
 
+    
+    await Account.create({
+        userId,
+        balance: 1 + Math.random() * 10000
+    })
+
     const token = jwt.sign({
         userId
     }, JWT_SECRET);
+
+
     res.json({
         message: "User created successfully",
-        token: token
+        token: token,
     })
 })
 
@@ -58,7 +66,7 @@ router.post('/signin', async function (req, res) {
         }
     }
 });
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjQyMmNiYjI5ZDFjYWY0YTU4MzUwZjQiLCJpYXQiOjE3MTU2OTY0NTl9.n1JSAWBNXvcJSlWY3_3aau7vH1LQgEMsholl1DVB0G4
+
 router.put('/', userMiddleware, async function (req, res) {
     const userId = req.userId;
     const { password, lastName, firstName } = req.body;
@@ -89,6 +97,28 @@ router.put('/', userMiddleware, async function (req, res) {
         res.status(500).json({
             message: "Error updating user data"
         });
+    }
+});
+
+
+router.get('/bulk', userMiddleware, async function (req, res) {
+    try {
+        const filter = req.query.filter || "";
+        const findResult = await User.find({
+            $or: [{
+                firstName: {
+                    "$regex": filter
+                }
+            }, {
+                lastName: {
+                    "$regex": filter
+                }
+            }]
+        })
+
+        res.json(findResult);
+    } catch (error) {
+        res.status(500).send("Failed to retrieve users.");
     }
 });
 
