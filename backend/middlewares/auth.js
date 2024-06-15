@@ -1,4 +1,3 @@
-const { User } = require("../db/index");
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 
