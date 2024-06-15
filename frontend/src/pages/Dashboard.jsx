@@ -6,7 +6,7 @@ export default function Dashboard() {
     return (
         <div>
             <Appbar></Appbar>
-            <Balance></Balance>
+            <Balance balance={10000}></Balance>
             <Users></Users>
         </div>
     )
