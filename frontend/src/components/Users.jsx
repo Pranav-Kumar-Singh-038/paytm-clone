@@ -4,7 +4,7 @@ import { Button } from "./Button"
 export default function Users()
 {
     const [users, setUsers] = useState([{
-        firstName: "Harkirat",
+        firstName: "Pranav",
         lastName: "Singh",
         _id: 1
     }]);
