@@ -4,7 +4,7 @@ import { Heading } from "../components/Heading";
 import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import {  tempFirstNameAtom, tempLastNameAtom, tempEmailAtom, tempPasswordAtom } from "../store/atoms/signupAtom";
+import {  tempFirstNameAtom, tempLastNameAtom, tempEmailAtom, tempPasswordAtom } from "../store/atoms/userAtom";
 import { tokenAtom } from "../store/atoms/tokenAtom";
 
 import React from 'react';
@@ -43,6 +43,7 @@ export default function Signup() {
           alert('Sign up successful!');
           setToken(data.token);
           localStorage.setItem('token', data.token);
+          localStorage.setItem('username', tempEmail)
         } else {
           alert('Sign up failed1: ' + data.message);
         }
