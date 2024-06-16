@@ -1,13 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "./Button"
+import { tokenAtom } from "../store/atoms/tokenAtom";
+import { useRecoilValue } from "recoil";
 
 export default function Users()
 {
-    const [users, setUsers] = useState([{
-        firstName: "Pranav",
-        lastName: "Singh",
-        _id: 1
-    }]);
+    const token = useRecoilValue(tokenAtom);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        getUsers(setUsers, token);
+    }, []); 
+
 
     return <>
         <div className="font-bold mt-6 text-lg">
@@ -43,4 +47,33 @@ function User({user}) {
             <Button label={"Send Money"} />
         </div>
     </div>
+}
+
+async function getUsers(setUsers, token)
+{
+    try {
+        const response = await fetch('http://localhost:3000/api/v1/user/bulk', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`,
+          }
+        });
+   
+        const data = await response.json();
+  
+        if (response.ok) {
+          if (data) {
+            // alert('Data Fetch successful!');
+            setUsers(data);
+          } else {
+            alert('Data Fetch failed: ' + data.message);
+          }
+        } else {
+          alert('Response Error: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('User Data Fetch failed!');
+      }
 }
