@@ -42,7 +42,7 @@ export default function Signup() {
         if (data) {
           alert('Sign up successful!');
           setToken(data.token);
-          localStorage.setItem('token', newToken);
+          localStorage.setItem('token', data.token);
         } else {
           alert('Sign up failed1: ' + data.message);
         }

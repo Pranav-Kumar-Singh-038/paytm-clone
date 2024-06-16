@@ -40,7 +40,7 @@ export default function Signin(){
         if (data) {
           alert('Sign in successful!');
           setToken(data.token);
-          localStorage.setItem('token', newToken);
+          localStorage.setItem('token', data.token);
         } else {
           alert('Sign in failed1: ' + data.message);
         }

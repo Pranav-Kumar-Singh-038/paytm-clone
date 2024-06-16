@@ -13,7 +13,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={token ? <Navigate to="/dashboard" /> : <Navigate to="/signup" />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard"  element={token ? <Dashboard/> : <Navigate to="/signup" />}  />
       <Route path="/signup" element={token ? <Navigate to="/dashboard" /> : <Signup />} />
       <Route path="/signin"  element={token ? <Navigate to="/dashboard" /> : <Signin />} />
       <Route path="/send" element={<SendMoney />} />
