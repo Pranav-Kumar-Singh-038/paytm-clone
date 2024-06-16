@@ -18,7 +18,7 @@ export default function Users()
         </div>
         <div>
             {users.map(function(user){ 
-            return <User user={user} />}
+            return <User key={user._id} user={user} />}
             )}
         </div>
     </>

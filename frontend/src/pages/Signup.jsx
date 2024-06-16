@@ -4,13 +4,17 @@ import { Heading } from "../components/Heading";
 import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { firstNameAtom, lastNameAtom, tempFirstNameAtom, tempLastNameAtom, tempEmailAtom, tempPasswordAtom, passwordAtom, emailAtom } from "../store/atoms/signupAtom";
+import {  tempFirstNameAtom, tempLastNameAtom, tempEmailAtom, tempPasswordAtom } from "../store/atoms/signupAtom";
+import { tokenAtom } from "../store/atoms/tokenAtom";
+
+import React from 'react';
 
 export default function Signup() {
   const setTempFirstName = useSetRecoilState(tempFirstNameAtom);
   const setTempLastName = useSetRecoilState(tempLastNameAtom);
   const setTempEmail = useSetRecoilState(tempEmailAtom);
   const setTempPassword = useSetRecoilState(tempPasswordAtom);
+  const setToken= useSetRecoilState(tokenAtom);
 
   const tempFirstName = useRecoilValue(tempFirstNameAtom);
   const tempLastName = useRecoilValue(tempLastNameAtom);
@@ -37,11 +41,13 @@ export default function Signup() {
       if (response.ok) {
         if (data) {
           alert('Sign up successful!');
+          setToken(data.token);
+          localStorage.setItem('token', newToken);
         } else {
           alert('Sign up failed1: ' + data.message);
         }
       } else {
-        alert('Sign up failed2: ' + data.message);
+        alert('Sign up failed: ' + data.message);
       }
     } catch (error) {
       console.error('Error:', error);

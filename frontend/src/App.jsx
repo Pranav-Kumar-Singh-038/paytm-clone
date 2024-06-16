@@ -1,26 +1,34 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { tokenAtom } from './store/atoms/tokenAtom';
 import Dashboard from './pages/Dashboard';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import SendMoney from './pages/SendMoney';
 import { RecoilRoot } from 'recoil';
 
-function App() {
+function AppRoutes() {
+  const token = useRecoilValue(tokenAtom);
 
   return (
-    <div>
-      <RecoilRoot>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/signin" element={<Signin />} />
-            <Route path="/send" element={<SendMoney />} />
-          </Routes>
-        </BrowserRouter>
-      </RecoilRoot>
-    </div>
-  )
+    <Routes>
+      <Route path="/" element={token ? <Navigate to="/dashboard" /> : <Navigate to="/signup" />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/signup" element={token ? <Navigate to="/dashboard" /> : <Signup />} />
+      <Route path="/signin"  element={token ? <Navigate to="/dashboard" /> : <Signin />} />
+      <Route path="/send" element={<SendMoney />} />
+    </Routes>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <RecoilRoot>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </RecoilRoot>
+  );
+}
+
+export default App;
