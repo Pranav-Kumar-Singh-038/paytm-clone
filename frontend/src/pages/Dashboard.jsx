@@ -47,7 +47,7 @@ export default function Dashboard() {
         <div>
             <Appbar username={storedUsername}></Appbar>
             <Balance balance={balance}></Balance>
-            <Users></Users>
+            <Users username={storedUsername}></Users>
         </div>
     );
 }
