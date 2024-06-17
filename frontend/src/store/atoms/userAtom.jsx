@@ -31,6 +31,11 @@ export const searchAtom=atom({
    default:""
 })
 
+export const recipientUserAtom=atom({
+   key:"recipientUserAtom",
+   default:null
+})
+
 
 
 

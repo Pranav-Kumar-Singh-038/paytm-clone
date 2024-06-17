@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { Button } from "./Button"
 import { tokenAtom } from "../store/atoms/tokenAtom";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { searchAtom } from "../store/atoms/userAtom";
-import { Navigate } from "react-router-dom";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { searchAtom, recipientUserAtom } from "../store/atoms/userAtom";
+import { useNavigate } from "react-router-dom";
 
 export default function Users({ username }) {
     const token = useRecoilValue(tokenAtom);
@@ -35,7 +35,13 @@ export default function Users({ username }) {
 }
 
 function User({ user }) {
-   
+    const [recipientUser, setRecipientUser] = useRecoilState(recipientUserAtom);
+    const navigate = useNavigate();
+
+    function handleSendClick() {
+        setRecipientUser(user); 
+        navigate('/send'); 
+    }
 
     return <div className="flex justify-between">
         <div className="flex">
@@ -52,7 +58,7 @@ function User({ user }) {
         </div>
 
         <div className="flex flex-col justify-center h-ful">
-            <Button label={"Send Money"} onClick={<Navigate to="/send" />}/>
+            <Button label={"Send Money"} onClick={handleSendClick} />
         </div>
     </div>
 }
@@ -82,8 +88,7 @@ async function getUsers(setUsers, token, usernameToFind, search) {
                             setUsers([upData]);
                         }
                     }
-                    else
-                    {
+                    else {
                         setUsers(updatedData)
                     }
                 } else {
