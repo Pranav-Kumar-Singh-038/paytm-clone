@@ -26,6 +26,10 @@ export const tempFirstNameAtom=atom({
    default:null
 })
  
+export const searchAtom=atom({
+   key:"searchAtom",
+   default:""
+})
 
 
 
