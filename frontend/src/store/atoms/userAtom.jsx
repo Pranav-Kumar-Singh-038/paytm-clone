@@ -36,6 +36,12 @@ export const recipientUserAtom=atom({
    default:null
 })
 
+export const moneyAtom=atom({
+   key:"moneyAtom",
+   default:""
+})
+
+
 
 
 
