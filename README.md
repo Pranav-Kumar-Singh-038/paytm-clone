@@ -96,3 +96,12 @@ Special thanks to the developers of Node.js, Express.js, MongoDB, and other open
 ## License
 
 This project is licensed under the MIT License.
+
+## Preview
+
+[Paytm-simple Preview](https://youtu.be/JQ8rFbFF6PM)
+
+
+## Paytm-simple
+
+![paytm-simple](./src/assets/paytm-simple-gif.gif) 
