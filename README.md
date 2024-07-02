@@ -93,10 +93,6 @@ To get started with Paytm, follow these steps:
 
 Special thanks to the developers of Node.js, Express.js, MongoDB, and other open-source technologies used in this project, and especially to Harkirat Singh and his 100xDevs cohort 2.0.
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Preview
 
 [Paytm-simple Preview](https://youtu.be/JQ8rFbFF6PM)
