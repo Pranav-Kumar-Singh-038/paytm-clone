@@ -104,4 +104,4 @@ This project is licensed under the MIT License.
 
 ## Paytm-simple
 
-![paytm-simple](./src/assets/paytm-simple-gif.gif) 
+![paytm-simple](./frontend/src/assets/paytm-simple-gif.gif) 
